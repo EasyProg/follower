@@ -1,10 +1,12 @@
+console.log(data);
+
 const canvas = document.getElementById('canvas');
 const width = canvas.width;
 const height = canvas.height;
 const ctx = canvas.getContext('2d');
 
-const makeNetwork  =  ( context, width, height ) => {
-    let i = 300;
+const makeNetwork  =  ( context, width, height, users ) => {
+    let i = users || 300;
     context.beginPath();
     context.fillStyle='#DEDCDC';
     context.lineWidth = 0.3;
@@ -24,4 +26,10 @@ const makeNetwork  =  ( context, width, height ) => {
     context.stroke();
 }
 
-makeNetwork(ctx, width, height);
+
+const maxY0 = getMaxOfArray(data[0].columns[1]);
+const maxY1 = getMaxOfArray(data[0].columns[1]);
+const maxUsers = getMaxOfArray([maxY0, maxY1]);
+const users = (Math.ceil(maxUsers/100) * 100);
+//console.log(data[0].columns[1]);
+makeNetwork(ctx, width, height, users);
